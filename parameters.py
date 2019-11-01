@@ -33,14 +33,26 @@ def loadParameters(self):
 
     writeSchedule()
 
+    common.numberOfAgent = eval(input('How many agents?'))
+    writeAgentsFile()
+
     N = common.numberOfAgent
     p = 0.6
     ps = 0.2
+
     common.workersGraph = nx.erdos_renyi_graph(N, p, directed= True)
     common.sellersGraph = nx.erdos_renyi_graph(N,ps,directed = True)
 
 
 
+def writeAgentsFile():
+
+    agentsFile = open('SIMmodel/tasteA.txt', 'w')
+    for i in range(common.numberOfAgent):
+
+        #initial instructions
+        agentsFile.write(str(i) + "\n")
+    agentsFile.close()
 
 
 
