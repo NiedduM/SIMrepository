@@ -17,23 +17,26 @@ class Eagent(Agent):
 		self.consumed = 0
 
 
-	def stampa(self):
-		print(self.agType)
-
-	def createList_deprecated(self):
-		self.sellerList = []
+	def createList(self):
 		print('createList method of n.', self.number)
+
 		for ag in self.agentList:
-			if(ag.agType == 'tasteA'):
-				if(ag.number != self.number):
-					self.sellerList.append(ag)
-			else:
+			if(ag.agType == 'tasteB'):
 				self.govern = ag
-		i = random.randint(0,len(self.sellerList)-1)
-		print(len(self.sellerList))
-		ag = self.sellerList[i]
-		self.workersList.append(ag)
+				break
+
+		wkProvv = []
+		slProvv = []
+		for ag in self.agentList:
+			if(ag.number in self.workersList):
+				wkProvv.append(ag)
+			if(ag.number in self.sellerList):
+				slProvv.append(ag)
+
+		self.workersList = wkProvv
+		self.sellerList = slProvv
 		print(self.workersList)
+
 
 	# as household
 	def reciveWage(self,wage):
@@ -54,7 +57,7 @@ class Eagent(Agent):
 			self.income -= c
 			self.consumed += c
 
-			#select a seller
+			#select a seller at random
 			i = random.randint(0,len(self.sellerList)-1)
 			self.sellerList[i].sell(c)
 		
@@ -75,9 +78,13 @@ class Eagent(Agent):
 	# as producer
 	def sell(self, demanded):
 		self.sold += demanded
-		print('I am reciving ', demanded)
+		print('I, n.', self.number, 'am reciving ', demanded)
+		#print(self.workerList)
 
 	def payWages(self):
+#		if(self.workersList == []):
+#			self.workersList.append(self)
+
 		wage = self.sold/len(self.workersList)
 		print(wage)
 		for ag in self.workersList:
