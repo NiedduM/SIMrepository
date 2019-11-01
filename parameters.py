@@ -36,8 +36,8 @@ def loadParameters(self):
     N = common.numberOfAgent
     p = 0.6
     ps = 0.2
-    self.ModelSwarm.workersGraph = nx.erdos_renyi_graph(N, p, directed= True)
-    self.ModelSwarm.sellersGraph = nx.erdos_renyi_graph(N,p,directed = True)
+    common.workersGraph = nx.erdos_renyi_graph(N, p, directed= True)
+    common.sellersGraph = nx.erdos_renyi_graph(N,p,directed = True)
 
 
 
