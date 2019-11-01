@@ -48,7 +48,7 @@ def loadParameters(self):
 def writeSchedule():
 
 
-    first = ['all createList','tasteB consume', 'tasteA payWages','tasteA payTaxes', 'tasteA consumeFromCash']
+    first = ['tasteB createList','tasteB consume', 'tasteA payWages','tasteA payTaxes', 'tasteA consumeFromCash']
     normal = ['tasteA consume','tasteA deposit','tasteA payWages','tasteA payTaxes']
     end = ['tasteA deposit']
     
