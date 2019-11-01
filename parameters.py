@@ -37,7 +37,7 @@ def loadParameters(self):
     p = 0.6
     ps = 0.2
     common.workersGraph = nx.erdos_renyi_graph(N, p, directed= True)
-    common.sellersGraph = nx.erdos_renyi_graph(N,p,directed = True)
+    common.sellersGraph = nx.erdos_renyi_graph(N,ps,directed = True)
 
 
 
