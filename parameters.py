@@ -1,6 +1,7 @@
 # parameters.py
 from Tools import *
 import commonVar as common
+import networkx as nx
 
 def loadParameters(self):
 
@@ -35,8 +36,8 @@ def loadParameters(self):
     N = common.numberOfAgent
     p = 0.6
     ps = 0.2
-    #self.ModelSwarm.workersGraph = nx.erdos_renyi_graph(N, p, directed= True)
-    #self.ModelSwarm.sellersGraph = nx.erdos_renyi_graph(N,p,directed = True)
+    self.ModelSwarm.workersGraph = nx.erdos_renyi_graph(N, p, directed= True)
+    self.ModelSwarm.sellersGraph = nx.erdos_renyi_graph(N,p,directed = True)
 
 
 
