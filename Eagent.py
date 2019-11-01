@@ -3,7 +3,7 @@ from Govern import *
 
 class Eagent(Agent):
 
-	def __init__(self,number, myWorldState, cash, alpha1, alpha2, workerList, agType ,lX=-20, rX=19, bY=-20, tY=19, income = 0, sold=0):
+	def __init__(self,number, myWorldState, cash, alpha1, alpha2, workerList, sellerList, agType ,lX=-20, rX=19, bY=-20, tY=19, income = 0, sold=0):
 
 		Agent.__init__(self,number, myWorldState, agType, lX=-20, rX=19, bY=-20, tY=19)
 
@@ -11,6 +11,7 @@ class Eagent(Agent):
 		self.alpha1 = alpha1
 		self.alpha2 = alpha2
 		self.workersList = workerList
+		self.sellerList = sellerList
 		self.income = 0
 		self.sold = 0
 		self.consumed = 0
@@ -19,7 +20,7 @@ class Eagent(Agent):
 	def stampa(self):
 		print(self.agType)
 
-	def createList(self):
+	def createList_deprecated(self):
 		self.sellerList = []
 		print('createList method of n.', self.number)
 		for ag in self.agentList:
