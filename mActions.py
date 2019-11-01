@@ -60,8 +60,8 @@ def createTheAgent_Class(self, line, num, agType, agClass):
     alpha2 = common.alpha2
     govCons = common.G
     taxRate = common.taxRate
-    workerList = []#[wk for wk in self.workersGraph.neighbors(num)
-    #sellerList = #[sl for sl in self.sellersGraph.neighbors(num)
+    workerList = [wk for wk in self.workersGraph.neighbors(num)
+    sellerList = [sl for sl in self.sellersGraph.neighbors(num)
     
     # first step in exec:
     # access the files of the classes to create the instances
