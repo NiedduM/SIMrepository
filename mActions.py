@@ -60,9 +60,13 @@ def createTheAgent_Class(self, line, num, agType, agClass):
     alpha2 = common.alpha2
     govCons = common.G
     taxRate = common.taxRate
-    workerList = [wk for wk in self.workersGraph.neighbors(num)
-    sellerList = [sl for sl in self.sellersGraph.neighbors(num)
-    
+    workerList = []
+    sellerList = []
+    if(agType == 'tasteA'):
+        workerList = [wk for wk in common.workersGraph.neighbors(num)]
+        sellerList = [sl for sl in common.sellersGraph.neighbors(num)]
+    print('wk list of agent n.', num, ' = ' , workerList)
+
     # first step in exec:
     # access the files of the classes to create the instances
     # N.B. to simplify the structure of SLAPP, the name of the
@@ -81,6 +85,7 @@ def createTheAgent_Class(self, line, num, agType, agClass):
 		'alpha1': alpha1,
 		'alpha2': alpha2,
 		'workerList': workerList,
+		'sellerList': sellerList,
 		'consumption': govCons,
 		'taxRate' : taxRate,	
                 'agType': agType}
@@ -92,6 +97,7 @@ def createTheAgent_Class(self, line, num, agType, agClass):
 		 "alpha1," +
 		 "alpha2," +
 		 "workerList," +
+		 "sellerList," +
                  "agType=agType)", space)
 
 

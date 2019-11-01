@@ -13,7 +13,7 @@ def loadParameters(self):
     print("\nProject version " + projectVersion)
 
     #seed of random
-    mySeed = eval(input("random number seed (1 to get it from the clock) "))
+    mySeed = 2#eval(input("random number seed (1 to get it from the clock) "))
     if mySeed == 1:
         random.seed()
     else:
@@ -40,9 +40,9 @@ def loadParameters(self):
     p = 0.6
     ps = 0.2
 
-    common.workersGraph = nx.erdos_renyi_graph(N, p, directed= True)
-    common.sellersGraph = nx.erdos_renyi_graph(N,ps,directed = True)
-
+    common.workersGraph = nx.complete_graph(N)     #erdos_renyi_graph(N, p, directed= True)
+    common.sellersGraph = nx.complete_graph(N) #erdos_renyi_graph(N,ps, directed = True)
+    print(common.workersGraph.nodes())
 
 
 def writeAgentsFile():
@@ -60,7 +60,7 @@ def writeAgentsFile():
 def writeSchedule():
 
 
-    first = ['tasteB createList','tasteB consume', 'tasteA payWages','tasteA payTaxes', 'tasteA consumeFromCash']
+    first = ['tasteB consume', 'tasteA payWages','tasteA payTaxes', 'tasteA consumeFromCash']
     normal = ['tasteA consume','tasteA deposit','tasteA payWages','tasteA payTaxes']
     end = ['tasteA deposit']
     
@@ -70,6 +70,8 @@ def writeSchedule():
 
         #initial instructions
         myfile.write('# '+ str(period*common.periodLength+1) + "\n")
+        if(period == 0):
+            myfile.write('all createList'+ "\n")
         for instruction in first:
             myfile.write(instruction + "\n")
         for instruction in normal:
