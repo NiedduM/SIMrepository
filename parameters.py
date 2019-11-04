@@ -62,7 +62,7 @@ def writeSchedule():
 
     first = ['tasteB consume', 'tasteA payWages','tasteA payTaxes', 'tasteA consumeFromCash']
     normal = ['tasteA consume','tasteA deposit','tasteA payWages','tasteA payTaxes']
-    end = ['tasteA deposit']
+    end = ['tasteA deposit', 'tasteA showTFM', 'all write_on_DB', 'WorldState computationalUse updatePeriod','all resetTFM']
     
     myfile = open('SIMmodel/schedule.txt', 'w')
     

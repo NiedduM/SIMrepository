@@ -1,5 +1,6 @@
 from Agent import *
 from Govern import *
+from TFmatrix import *
 
 class Eagent(Agent):
 
@@ -15,7 +16,8 @@ class Eagent(Agent):
 		self.income = 0
 		self.sold = 0
 		self.consumed = 0
-
+		self.householdTFM = TFmatrix()
+		self.producerTFM = TFmatrix()
 
 	def createList(self):
 		print('createList method of n.', self.number)
@@ -43,12 +45,13 @@ class Eagent(Agent):
 
 		self.income += wage
 		print('n. ', self.number ,'wage received ', self.income)
+		self.householdTFM.updateWages(wage)
 
 	def payTaxes(self):
 		T = self.govern.taxRate*self.income
 		self.govern.receiveTaxes(T)			
 		self.income -= T
-		
+		self.householdTFM.updateTaxes(-T)
 
 	def consume(self):
 		print('n.', self.number, 'I am consuming')
@@ -56,11 +59,11 @@ class Eagent(Agent):
 			c = self.alpha1*self.income
 			self.income -= c
 			self.consumed += c
-
+			self.householdTFM.updateConsumption(-c)
 			#select a seller at random
 			i = random.randint(0,len(self.sellerList)-1)
-			self.sellerList[i].sell(c)
-		
+			self.sellerList[i].sell(c, gov = False)
+		 
 
 	def consumeFromCash(self):
 		if(self.cash >0):
@@ -68,27 +71,62 @@ class Eagent(Agent):
 			self.cash -= c
 			self.consumed += c
 			i = random.randint(0,len(self.sellerList)-1)
-			self.sellerList[i].sell(c)
-
+			self.sellerList[i].sell(c, gov = False)
+			self.householdTFM.updateConsumption(-c)
+			self.householdTFM.updateMoneyDep(-c)
 
 	def deposit(self):
 		self.cash += self.income
+		self.householdTFM.updateMoneyDep(self.income)
 		self.income = 0
 
 	# as producer
-	def sell(self, demanded):
+	def sell(self, demanded,gov):
 		self.sold += demanded
 		print('I, n.', self.number, 'am reciving ', demanded)
-		#print(self.workerList)
+		if(gov):
+			self.producerTFM.updateGovernmentExpenditures(demanded)
+		else:
+			self.producerTFM.updateConsumption(demanded)
+
+
 
 	def payWages(self):
 #		if(self.workersList == []):
 #			self.workersList.append(self)
-
+		self.producerTFM.updateWages(-self.sold)
 		wage = self.sold/len(self.workersList)
-		print(wage)
+		#print(wage)
 		for ag in self.workersList:
 			ag.reciveWage(wage)
 		self.sold = 0
-		
+
+
+
+	def showTFM(self):
+
+		print('My household matrix')
+		self.householdTFM.show()
+		print('My producer matrix')
+		self.producerTFM.show()
+
+
+
+	def resetTFM(self):
+
+		self.householdTFM = TFmatrix()
+		self.producerTFM = TFmatrix()
+
+
+
+	def write_on_DB(self):
+
+		lista = [self.number, 'Household', self.myWorldState.period]
+		lista += self.householdTFM.listify()
+		self.myWorldState.insertNewEntry(lista)
+
+		lista2 = [self.number, 'Producer', self.myWorldState.period]
+		lista2 += self.producerTFM.listify()
+		self.myWorldState.insertNewEntry(lista2)
+
 

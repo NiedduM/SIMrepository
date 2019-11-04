@@ -2,7 +2,8 @@ from Tools import *
 from Agent import *
 from Eagent import *
 from Govern import *
-
+from WorldState import *
+import pickle as pk
 
 def do1b(address):
     pass
@@ -37,8 +38,9 @@ def showResult(address):
 	print('C  ', C)
 	print('H  ', Hg)
 
+	fi = open('SIMmodel/Pickleprove', 'wb')
 
-
-
+	db = address.modelSwarm.worldState.db
+	pk.dump(db,fi)
 
 
