@@ -31,10 +31,12 @@ class Govern(Agent):
 			ag.sell(demanded, True)
 		self.cash -= self.consumption
 		self.TFM.updateGovernmentExpenditures(-self.consumption)
+		self.TFM.updateMoneyDep(-self.consumption)
 
 	def receiveTaxes(self, T):
 		self.cash += T
 		self.TFM.updateTaxes(T)
+		self.TFM.updateMoneyDep(T)
 		#aggiorna T in matrice TF
 
 
