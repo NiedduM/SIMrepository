@@ -20,4 +20,8 @@ periodLength = 100
 
 numberOfPeriods = 1
 
+heterogeneity = False
 
+#other variables of this file defined in other parts:
+
+# 

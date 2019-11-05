@@ -41,7 +41,9 @@ def loadParameters(self):
     ps = 0.2
 
     common.workersGraph = nx.complete_graph(N)     #erdos_renyi_graph(N, p, directed= True)
+    common.wGlabel = 'complete'
     common.sellersGraph = nx.complete_graph(N) #erdos_renyi_graph(N,ps, directed = True)
+    common.sGlabel = 'complete'
     print(common.workersGraph.nodes())
 
 
