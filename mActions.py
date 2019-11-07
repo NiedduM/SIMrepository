@@ -1,6 +1,7 @@
 from Agent import *
 from Eagent import *
 from Govern import *
+import numpy as np
 import os
 
 
@@ -55,9 +56,14 @@ def createTheAgent_Class(self, line, num, agType, agClass):
             os.sys.exit(1)
 
     print(agClass)
-    
+
     alpha1 = common.alpha1
     alpha2 = common.alpha2
+
+    if(common.heterogeneity): 
+        alpha1 = np.random.uniform(0,1)     #normal(loc=common.alpha1 ,scale=common.alpha1/10)
+        alpha2 = 1-alpha1
+
     govCons = common.G
     taxRate = common.taxRate
     workerList = []

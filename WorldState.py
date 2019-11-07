@@ -21,7 +21,7 @@ class WorldState(object):
 
 	def insertNewEntry(self,lista):
 
-		self.db = self.db.append([lista])
+		self.db = self.db.append([lista], ignore_index= True)
 
 
 

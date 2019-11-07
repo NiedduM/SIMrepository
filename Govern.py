@@ -21,7 +21,7 @@ class Govern(Agent):
 		for ag in self.agentList:
 			if(ag.agType == 'tasteA'):
 				self.eagentList.append(ag)
-		print(len(self.eagentList))
+		#print(len(self.eagentList))
 
 
 	def consume(self):

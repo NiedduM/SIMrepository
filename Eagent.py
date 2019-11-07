@@ -20,7 +20,7 @@ class Eagent(Agent):
 		self.producerTFM = TFmatrix()
 
 	def createList(self):
-		print('createList method of n.', self.number)
+		#print('createList method of n.', self.number)
 
 		for ag in self.agentList:
 			if(ag.agType == 'tasteB'):
@@ -29,6 +29,7 @@ class Eagent(Agent):
 
 		wkProvv = []
 		slProvv = []
+		# when Eagent is created, worker and sellers lists are lists of number. Here the lists are converted in lists of agent
 		for ag in self.agentList:
 			if(ag.number in self.workersList):
 				wkProvv.append(ag)
@@ -37,14 +38,29 @@ class Eagent(Agent):
 
 		self.workersList = wkProvv
 		self.sellerList = slProvv
-		print(self.workersList)
+		#print(self.workersList)
+		if(len(self.workersList) == 0):
+			print('Workers list is empty, I am choosing at random')
+			ag = self.agentList[0]
+			while(ag.agType == 'tasteB'):
+				ag = self.agentList[0]  #SLAPP reshuffle agent list every time it is acessed
+			self.workersList.append(ag)
+
+
+		if(len(self.sellerList) == 0):
+			print('Sellers list is empty, I am choosing at random')
+			ag = self.agentList[0]
+			while(ag.agType == 'tasteB'):
+				ag = self.agentList[0]  #SLAPP reshuffle agent list every time it is acessed
+			self.sellerList.append(ag)
+
 
 
 	# as household
 	def reciveWage(self,wage):
 
 		self.income += wage
-		print('n. ', self.number ,'wage received ', self.income)
+		#print('n. ', self.number ,'wage received ', self.income)
 		self.householdTFM.updateWages(wage)
 
 	def payTaxes(self):
@@ -54,7 +70,7 @@ class Eagent(Agent):
 		self.householdTFM.updateTaxes(-T)
 
 	def consume(self):
-		print('n.', self.number, 'I am consuming')
+		#print('n.', self.number, 'I am consuming')
 		if(self.income > 0.00001):	#
 			c = self.alpha1*self.income
 			self.income -= c
@@ -83,7 +99,7 @@ class Eagent(Agent):
 	# as producer
 	def sell(self, demanded,gov):
 		self.sold += demanded
-		print('I, n.', self.number, 'am reciving ', demanded)
+		#print('I, n.', self.number, 'am reciving ', demanded)
 		if(gov):
 			self.producerTFM.updateGovernmentExpenditures(demanded)
 		else:
